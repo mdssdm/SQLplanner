@@ -23,7 +23,39 @@ public class Config {
         } catch (Exception ex) {
             lastError = ex.getMessage();
         }
-
+    }
+    
+    private Node getChildByName(Node node, String name) {
+        Node child = node.getFirstChild();
+        while (child != null) {
+            if (child.getNodeName() == name) {
+                return child;
+            }
+            child = child.getNextSibling();
+        }
+        return null;
+    }
+    
+    private String getNodeText(Node node) {
+        Node child = node.getFirstChild();
+        while (child != null) {
+            if (child.getNodeName() == "#text") {
+                return child.getNodeValue();
+            }
+            child = child.getNextSibling();
+        }
+        return null;
+    }
+    
+    public String getParameter(String Section, String Parameter) {
+        Node section = getChildByName(root, Section);
+        if (section != null) {
+            Node parameter = getChildByName(section, Parameter);
+            if (parameter != null) {
+                return getNodeText(parameter);
+            }
+        }
+        return null;
     }
 
     public String getLastError() {

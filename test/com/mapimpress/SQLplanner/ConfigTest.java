@@ -59,4 +59,31 @@ public class ConfigTest {
         assertNotEquals("", conf.getLastError());
     }
     
+    /**
+     * Test of getParameter method, of class Config.
+     */
+    @Test
+    public void testMethod_getParameter_Type() throws ParserConfigurationException, SAXException, IOException {
+        Config conf = new Config("sqlplanner.conf");
+        assertEquals("Thin", conf.getParameter("Server", "Type"));
+    }
+    
+    /**
+     * Test of getParameter method, of class Config.
+     */
+    @Test
+    public void testMethod_getParameter_Port() throws ParserConfigurationException, SAXException, IOException {
+        Config conf = new Config("sqlplanner.conf");
+        assertEquals("1521", conf.getParameter("Server", "Port"));
+    }
+    
+    /**
+     * Test of getParameter method, of class Config.
+     */
+    @Test
+    public void testMethod_getParameter_Host() throws ParserConfigurationException, SAXException, IOException {
+        Config conf = new Config("sqlplanner.conf");
+        assertEquals("192.168.0.13", conf.getParameter("Server", "Host"));
+    }
+
 }
